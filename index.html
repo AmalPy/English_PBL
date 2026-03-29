@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brave New World — Aldous Huxley</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --dark: #1a1510;
+    --rust: #b84c1a;
+    --gold: #c9a84c;
+    --ash: #8a8070;
+    --deep-red: #7a1c1c;
+    --teal: #1c5a5a;
+    --paper: #ede8dc;
+    --ink: #2a2018;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--dark);
+    color: var(--cream);
+    font-family: 'IM Fell English', serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    position: relative;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, #2a1f0e 0%, var(--dark) 70%);
+    overflow: hidden;
+    padding: 4rem 2rem;
+  }
+
+  .hero-rings {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    animation: pulse 8s ease-in-out infinite;
+  }
+
+  .ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
+  .ring:nth-child(2) { width: 500px; height: 500px; animation-delay: 1s; border-color: rgba(201,168,76,0.08); }
+  .ring:nth-child(3) { width: 700px; height: 700px; animation-delay: 2s; border-color: rgba(201,168,76,0.05); }
+  .ring:nth-child(4) { width: 950px; height: 950px; animation-delay: 3s; border-color: rgba(201,168,76,0.03); }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.03); opacity: 0.7; }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    opacity: 0;
+    animation: fadeUp 1.1s ease 0.5s forwards;
+    position: relative;
+  }
+
+  .hero-title span {
+    display: block;
+    color: var(--rust);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .hero-author {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--ash);
+    margin-top: 2rem;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 2.5rem auto;
+    opacity: 0;
+    animation: fadeUp 1s ease 1s forwards;
+  }
+
+  .hero-tagline {
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--paper);
+    max-width: 520px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.2s forwards;
+  }
+
+  .hero-year {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 3rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(201,168,76,0.06);
+    letter-spacing: -0.05em;
+    user-select: none;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--ash);
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 2s forwards;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--ash), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── QUOTE BANNER ── */
+  .quote-banner {
+    background: var(--deep-red);
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-banner::before {
+    content: '❝';
+    position: absolute;
+    font-size: 20rem;
+    color: rgba(255,255,255,0.03);
+    top: -4rem;
+    left: 2rem;
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+  }
+
+  .quote-banner blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-style: italic;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--paper);
+    position: relative;
+    z-index: 1;
+  }
+
+  .quote-banner cite {
+    display: block;
+    margin-top: 1.5rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.5);
+    font-style: normal;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION SHARED ── */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    line-height: 1.85;
+    color: rgba(245,240,232,0.8);
+    font-size: 1.05rem;
+    max-width: 680px;
+  }
+
+  /* ── OVERVIEW ── */
+  .overview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .overview { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  .overview-text p + p { margin-top: 1.5rem; }
+
+  .overview-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 1.5rem;
+    border-radius: 2px;
+    transition: background 0.3s;
+  }
+
+  .stat-card:hover { background: rgba(201,168,76,0.05); }
+
+  .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--ash);
+    text-transform: uppercase;
+  }
+
+  /* ── WORLD DIVIDER ── */
+  .full-bleed {
+    width: 100%;
+    max-width: 100%;
+    background: #0e0b07;
+    padding: 5rem 2rem;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .full-bleed-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .ticker {
+    white-space: nowrap;
+    overflow: hidden;
+    border-top: 1px solid rgba(201,168,76,0.2);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 0.75rem 0;
+    margin-bottom: 5rem;
+  }
+
+  .ticker-track {
+    display: inline-block;
+    animation: ticker 20s linear infinite;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── CASTE SYSTEM ── */
+  .castes {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 900px) {
+    .castes { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 500px) {
+    .castes { grid-template-columns: 1fr 1fr; }
+  }
+
+  .caste-card {
+    padding: 2rem 1.2rem;
+    border-radius: 2px;
+    text-align: center;
+    position: relative;
+    cursor: default;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .caste-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  }
+
+  .caste-alpha { background: linear-gradient(135deg, #2a2a1a 0%, #1a1a0a 100%); border: 1px solid rgba(220,190,80,0.4); }
+  .caste-beta  { background: linear-gradient(135deg, #1a2a2a 0%, #0a1a1a 100%); border: 1px solid rgba(80,180,180,0.3); }
+  .caste-gamma { background: linear-gradient(135deg, #1a1a2a 0%, #0a0a1a 100%); border: 1px solid rgba(100,100,200,0.3); }
+  .caste-delta { background: linear-gradient(135deg, #2a1a1a 0%, #1a0a0a 100%); border: 1px solid rgba(180,80,80,0.3); }
+  .caste-epsilon{ background: linear-gradient(135deg, #1a1a1a 0%, #0e0e0e 100%); border: 1px solid rgba(120,100,80,0.2); }
+
+  .caste-greek {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .caste-alpha .caste-greek { color: #d4a820; }
+  .caste-beta .caste-greek { color: #40b0b0; }
+  .caste-gamma .caste-greek { color: #6868d0; }
+  .caste-delta .caste-greek { color: #b84040; }
+  .caste-epsilon .caste-greek { color: #787060; }
+
+  .caste-name {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ash);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .caste-desc {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: rgba(245,240,232,0.55);
+    font-family: 'IM Fell English', serif;
+  }
+
+  /* ── CHARACTERS ── */
+  .characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .char-card {
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 2.5rem 2rem;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .char-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s ease;
+  }
+
+  .char-card:hover::before { transform: scaleY(1); }
+  .char-card:hover { border-color: rgba(201,168,76,0.2); background: rgba(201,168,76,0.03); }
+
+  .char-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: var(--cream);
+  }
+
+  .char-role {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .char-desc {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.65);
+  }
+
+  /* ── THEMES ── */
+  .themes-section {
+    background: #0e0b07;
+    width: 100%;
+    max-width: 100%;
+    padding: 6rem 2rem;
+  }
+
+  .themes-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .themes-list {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  @media (max-width: 640px) {
+    .themes-list { grid-template-columns: 1fr; }
+  }
+
+  .theme-item {
+    padding: 2.5rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .theme-item:hover { background: rgba(255,255,255,0.02); }
+
+  .theme-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(201,168,76,0.08);
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .theme-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: var(--cream);
+  }
+
+  .theme-text {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.58);
+    max-width: 100%;
+  }
+
+  /* ── CONTEXT ── */
+  .context-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .context-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  .context-text p + p { margin-top: 1.5rem; }
+
+  .sidebar-facts {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .fact-item {
+    background: rgba(255,255,255,0.02);
+    border-left: 2px solid var(--rust);
+    padding: 1.2rem 1.5rem;
+  }
+
+  .fact-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    color: var(--ash);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .fact-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--cream);
+  }
+
+  /* ── LEGACY ── */
+  .legacy-section {
+    background: linear-gradient(180deg, var(--dark) 0%, #0a0705 100%);
+    padding: 6rem 2rem;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .legacy-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .legacy-inner p {
+    margin: 0 auto 1.5rem;
+    font-size: 1.05rem;
+    text-align: center;
+  }
+
+  .comparison-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .badge {
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 0.7rem 1.5rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--ash);
+    text-transform: uppercase;
+    border-radius: 100px;
+    transition: all 0.3s;
+  }
+
+  .badge:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080604;
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  footer p {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+    max-width: none;
+    margin: 0 auto;
+  }
+
+  footer .footer-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-style: italic;
+    color: rgba(255,255,255,0.1);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(10,8,4,0.9), transparent);
+    backdrop-filter: blur(0px);
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+
+  nav.scrolled {
+    background: rgba(10,8,4,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--ash);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  @media (max-width: 640px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <span class="nav-brand">Brave New World</span>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#world">World</a></li>
+    <li><a href="#characters">Characters</a></li>
+    <li><a href="#themes">Themes</a></li>
+    <li><a href="#legacy">Legacy</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-rings">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+  </div>
+  <div>
+    <p class="hero-eyebrow">Aldous Huxley · 1932</p>
+    <h1 class="hero-title">
+      Brave<br><span>New World</span>
+    </h1>
+    <p class="hero-author">A Novel by Aldous Leonard Huxley</p>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">A terrifying vision of a future where humanity has traded freedom for happiness — and forgotten the difference.</p>
+  </div>
+  <span class="hero-year">1932</span>
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<!-- QUOTE BANNER -->
+<div class="quote-banner">
+  <blockquote>
+    "A squat grey building of only thirty-four stories. Over the main entrance the words, Central London Hatchery and Conditioning Centre, and, in a shield, the World State's motto, <em>Community, Identity, Stability.</em>"
+    <cite>— Opening Line, Chapter I</cite>
+  </blockquote>
+</div>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="overview">
+    <div class="overview-text">
+      <span class="section-label">Overview</span>
+      <h2>A World Without Suffering — or Soul</h2>
+      <p>First published in 1932, <em>Brave New World</em> is Aldous Huxley's towering dystopian novel, set in the World State of A.F. 632 — 632 years after Henry Ford's Model T. In this future, humans are no longer born: they are manufactured, conditioned, and sorted into castes before they can even breathe.</p>
+      <p>The novel follows Bernard Marx, a psychologically restless Alpha, and the Savage John — a man born naturally, outside the World State — as their collision exposes the hollowness beneath a society engineered for perfect contentment.</p>
+      <p>Praised alongside Orwell's <em>Nineteen Eighty-Four</em> as one of the defining works of speculative fiction, the book remains devastatingly relevant — a warning about consumerism, surveillance, psychological manipulation, and the cost of happiness without choice.</p>
+    </div>
+    <div class="overview-stats">
+      <div class="stat-card">
+        <span class="stat-value">1932</span>
+        <span class="stat-label">Year Published</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">18</span>
+        <span class="stat-label">Chapters</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">A.F. 632</span>
+        <span class="stat-label">Setting</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">5</span>
+        <span class="stat-label">Caste Levels</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORLD SYSTEM -->
+<div class="full-bleed" id="world">
+  <div class="ticker">
+    <span class="ticker-track">
+      COMMUNITY · IDENTITY · STABILITY &nbsp;&nbsp;·&nbsp;&nbsp; COMMUNITY · IDENTITY · STABILITY &nbsp;&nbsp;·&nbsp;&nbsp; COMMUNITY · IDENTITY · STABILITY &nbsp;&nbsp;·&nbsp;&nbsp; COMMUNITY · IDENTITY · STABILITY &nbsp;&nbsp;·&nbsp;&nbsp; COMMUNITY · IDENTITY · STABILITY &nbsp;&nbsp;·&nbsp;&nbsp; COMMUNITY · IDENTITY · STABILITY &nbsp;&nbsp;·&nbsp;&nbsp; COMMUNITY · IDENTITY · STABILITY &nbsp;&nbsp;·&nbsp;&nbsp;
+    </span>
+  </div>
+  <div class="full-bleed-inner">
+    <span class="section-label">The Caste System</span>
+    <h2>The World State's Social Order</h2>
+    <p>Every citizen of the World State is engineered and conditioned into one of five castes, each fulfilling a precise social function — a biological hierarchy that eliminates ambition, envy, and conflict by design.</p>
+    <div class="castes">
+      <div class="caste-card caste-alpha">
+        <span class="caste-greek">α</span>
+        <span class="caste-name">Alpha</span>
+        <p class="caste-desc">The intellectual elite. Tall, handsome, unconditioned. Given to leadership and complex thought. Bernard Marx and Helmholtz Watson belong here.</p>
+      </div>
+      <div class="caste-card caste-beta">
+        <span class="caste-greek">β</span>
+        <span class="caste-name">Beta</span>
+        <p class="caste-desc">Capable and contented administrators. Slightly below Alphas in intelligence. Lenina Crowne is a proud Beta-Plus.</p>
+      </div>
+      <div class="caste-card caste-gamma">
+        <span class="caste-greek">γ</span>
+        <span class="caste-name">Gamma</span>
+        <p class="caste-desc">Mid-level workers. Conditioned to feel content with their station and envious of nothing above them — by chemical and psychological design.</p>
+      </div>
+      <div class="caste-card caste-delta">
+        <span class="caste-greek">δ</span>
+        <span class="caste-name">Delta</span>
+        <p class="caste-desc">Unskilled laborers, conditioned to love their work and hate books and flowers. Uniformed in khaki. Capable of simple but not complex tasks.</p>
+      </div>
+      <div class="caste-card caste-epsilon">
+        <span class="caste-greek">ε</span>
+        <span class="caste-name">Epsilon</span>
+        <p class="caste-desc">The lowest caste. Intentionally stunted in the bottle through oxygen deprivation. Perform the most menial tasks with engineered satisfaction.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHARACTERS -->
+<section id="characters">
+  <span class="section-label">Characters</span>
+  <h2>The People of the World State</h2>
+  <p>Huxley populates his dystopia with characters who illuminate the contradictions of the system — those who belong, those who resist, and those who were never given a choice.</p>
+  <div class="characters-grid">
+    <div class="char-card">
+      <p class="char-name">Bernard Marx</p>
+      <span class="char-role">Alpha-Plus · Psychologist</span>
+      <p class="char-desc">The novel's initial protagonist. An Alpha haunted by a rumored bottling accident that left him smaller and more introspective than his caste. He longs for authentic experience but lacks the courage to truly act on his convictions.</p>
+    </div>
+    <div class="char-card">
+      <p class="char-name">John the Savage</p>
+      <span class="char-role">The Outsider</span>
+      <p class="char-desc">Born naturally to Linda in the Savage Reservation, John is the novel's moral heart. Raised on Shakespeare, he brings passion, conscience, and anguish into a world engineered to feel none of them — with tragic results.</p>
+    </div>
+    <div class="char-card">
+      <p class="char-name">Lenina Crowne</p>
+      <span class="char-role">Beta-Plus · Vaccinator</span>
+      <p class="char-desc">Beautiful and perfectly conditioned, Lenina is a product of her world — promiscuous by design, allergic to solitude, addicted to soma. She fascinates both Bernard and John, and confounds them both.</p>
+    </div>
+    <div class="char-card">
+      <p class="char-name">Mustapha Mond</p>
+      <span class="char-role">World Controller of Western Europe</span>
+      <p class="char-desc">The most intellectually formidable character in the novel. Mond once pursued banned science and understands the world's trade-offs perfectly. He chose power and stability over truth — and he knows exactly what he gave up.</p>
+    </div>
+    <div class="char-card">
+      <p class="char-name">Helmholtz Watson</p>
+      <span class="char-role">Alpha-Plus · Emotional Engineer</span>
+      <p class="char-desc">A gifted writer who senses the shallowness of the propaganda he creates. More genuinely rebellious than Bernard, he befriends John and recognizes a fellow spirit — one who found words adequate to feeling.</p>
+    </div>
+    <div class="char-card">
+      <p class="char-name">Linda</p>
+      <span class="char-role">Beta · John's Mother</span>
+      <p class="char-desc">Once a citizen of the World State, Linda was stranded on the Reservation after an accident, where she gave birth to John — an act of shame in the conditioned world. She returns to London as a figure of ruin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THEMES -->
+<div class="themes-section" id="themes">
+  <div class="themes-inner">
+    <span class="section-label">Major Themes</span>
+    <h2>The Ideas That Haunt the Novel</h2>
+    <p>Huxley weaves a dense tapestry of philosophical and political questions — many of which have grown more urgent with time, not less.</p>
+    <div class="themes-list">
+      <div class="theme-item">
+        <span class="theme-num">01</span>
+        <h3 class="theme-title">Freedom vs. Happiness</h3>
+        <p class="theme-text">The World State's central bargain: citizens surrender autonomy, family, art, religion, and science in exchange for guaranteed contentment. Mond argues this is humanity's highest achievement. John calls it slavery.</p>
+      </div>
+      <div class="theme-item">
+        <span class="theme-num">02</span>
+        <h3 class="theme-title">The Dangers of Technology</h3>
+        <p class="theme-text">Bokanovsky's Process, Podsnap's Technique, and neo-Pavlovian conditioning show how science, divorced from ethics, becomes the most efficient instrument of oppression ever devised.</p>
+      </div>
+      <div class="theme-item">
+        <span class="theme-num">03</span>
+        <h3 class="theme-title">Consumerism & Control</h3>
+        <p class="theme-text">Citizens are engineered to desire, consume, and discard — "ending is better than mending." Soma, pneumatic leisure, and feelies keep the populace satiated and compliant in a perpetual consumer loop.</p>
+      </div>
+      <div class="theme-item">
+        <span class="theme-num">04</span>
+        <h3 class="theme-title">Identity & Individuality</h3>
+        <p class="theme-text">Bokanovsky's Process creates people by the dozens — identical twins performing identical functions. The very concept of a unique self is the World State's greatest enemy, systematically erased before birth.</p>
+      </div>
+      <div class="theme-item">
+        <span class="theme-num">05</span>
+        <h3 class="theme-title">Truth & Art</h3>
+        <p class="theme-text">Great literature, passionate art, and authentic religion require suffering and instability. The World State's stability demands their abolition. Mond locks away banned books — including Shakespeare — in his private safe.</p>
+      </div>
+      <div class="theme-item">
+        <span class="theme-num">06</span>
+        <h3 class="theme-title">Class & Caste</h3>
+        <p class="theme-text">The five castes naturalize inequality through biology, making social hierarchy feel inevitable rather than constructed. This is Huxley's prescient warning about technocracy: the most effective control is the kind people never think to question.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT -->
+<section>
+  <div class="context-grid">
+    <div class="context-text">
+      <span class="section-label">Historical Context</span>
+      <h2>A Book Born from Anxiety</h2>
+      <p>Huxley wrote <em>Brave New World</em> in four months in 1931, as a satirical response to the utopian optimism of H.G. Wells. He was alarmed by the rapid rise of Fordist mass production, Stalinist collectivism, and the eugenics movement then fashionable across Europe and America.</p>
+      <p>The novel's title is drawn from Shakespeare's <em>The Tempest</em>, spoken by Miranda: "O brave new world, that has such people in't!" — a line of innocent wonder Huxley bends into devastating irony.</p>
+      <p>In 1958, Huxley revisited his themes in the essay collection <em>Brave New World Revisited</em>, concluding with alarm that reality was catching up to his fiction faster than he had imagined. Today, debates over genetic engineering, psychopharmacology, social media, and surveillance invoke his novel almost reflexively.</p>
+    </div>
+    <div class="sidebar-facts">
+      <div class="fact-item">
+        <span class="fact-label">Genre</span>
+        <span class="fact-value">Dystopian Fiction / Satirical Novel</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Author</span>
+        <span class="fact-value">Aldous Leonard Huxley (1894–1963)</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Published</span>
+        <span class="fact-value">Chatto & Windus, London, 1932</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Written In</span>
+        <span class="fact-value">Four months, 1931</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Setting</span>
+        <span class="fact-value">London & New Mexico, A.F. 632</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Title Source</span>
+        <span class="fact-value">Shakespeare, The Tempest (Act V)</span>
+      </div>
+      <div class="fact-item">
+        <span class="fact-label">Banned In</span>
+        <span class="fact-value">Ireland (1932), India, Australia</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEGACY -->
+<div class="legacy-section" id="legacy">
+  <div class="legacy-inner">
+    <span class="section-label">Legacy</span>
+    <h2>Why It Still Matters</h2>
+    <p>Nearly a century after publication, <em>Brave New World</em> endures as one of the most prophetic novels ever written. Its vision of soft totalitarianism — control through pleasure rather than pain — feels more contemporary than ever in an age of algorithmic feeds, pharmaceutical mood management, and engineered desire.</p>
+    <p>Unlike Orwell's boot stamping on a human face, Huxley's nightmare smiles. Citizens don't suffer — they simply never ask whether they want to be happy, or whether they want to be free.</p>
+    <p>That question — the one the World State has made unthinkable — is the reason we keep reading Huxley.</p>
+    <div class="comparison-badges">
+      <span class="badge">Nineteen Eighty-Four</span>
+      <span class="badge">Fahrenheit 451</span>
+      <span class="badge">We — Yevgeny Zamyatin</span>
+      <span class="badge">The Handmaid's Tale</span>
+      <span class="badge">Player Piano</span>
+      <span class="badge">Lord of the Flies</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-title">Brave New World</p>
+  <p>Aldous Huxley · 1932 &nbsp;·&nbsp; An Informational Reference &nbsp;·&nbsp; For Educational Use</p>
+</footer>
+
+<script>
+  // Sticky nav
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.char-card, .caste-card, .theme-item, .stat-card, .fact-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

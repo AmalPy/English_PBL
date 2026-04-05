@@ -650,6 +650,213 @@
     letter-spacing: 0.05em;
   }
 
+  /* ── VISUAL EXPLANATIONS ── */
+  .visual-explain-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .ve-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.3s;
+  }
+
+  .ve-item:last-child { border-bottom: none; }
+  .ve-item:hover { background: rgba(201,168,76,0.03); }
+
+  .ve-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    padding: 2rem 1rem;
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+
+  .ve-body {
+    padding: 2rem 2.5rem;
+  }
+
+  .ve-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.8rem;
+  }
+
+  .ve-desc {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.62);
+    max-width: 760px;
+  }
+
+  @media (max-width: 560px) {
+    .ve-item { grid-template-columns: 1fr; }
+    .ve-icon { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 1rem; }
+  }
+
+  /* ── REFERENCES ── */
+  .ref-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .ref-card {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 1.5rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 2rem;
+    border-radius: 2px;
+    align-items: start;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .ref-card:hover {
+    border-color: rgba(201,168,76,0.2);
+    background: rgba(201,168,76,0.03);
+  }
+
+  .ref-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: rgba(201,168,76,0.2);
+    line-height: 1;
+    padding-top: 0.2rem;
+  }
+
+  .ref-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .ref-meta {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .ref-desc {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: rgba(245,240,232,0.58);
+    max-width: 100%;
+  }
+
+  .ref-link {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    transition: border-color 0.2s;
+    text-transform: lowercase;
+    letter-spacing: 0;
+  }
+
+  .ref-link:hover { border-color: var(--gold); }
+
+  @media (max-width: 560px) {
+    .ref-card { grid-template-columns: 1fr; gap: 0.5rem; }
+    .ref-num { font-size: 1.2rem; }
+  }
+
+  /* ── AUTHORS CREDIT ── */
+  .authors-credit {
+    background: linear-gradient(135deg, #1a1208 0%, #0e0b07 100%);
+    padding: 5rem 2rem;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    text-align: center;
+  }
+
+  .authors-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .authors-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 700px) {
+    .authors-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .authors-grid { grid-template-columns: 1fr; }
+  }
+
+  .author-card {
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 2.5rem 1.5rem;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .author-card:hover {
+    background: rgba(201,168,76,0.05);
+    border-color: rgba(201,168,76,0.4);
+  }
+
+  .author-initial {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .author-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+  }
+
+  .author-id {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--ash);
+    text-transform: uppercase;
+  }
+
   /* ── NAV ── */
   nav {
     position: fixed;
@@ -714,6 +921,8 @@
     <li><a href="#characters">Characters</a></li>
     <li><a href="#themes">Themes</a></li>
     <li><a href="#legacy">Legacy</a></li>
+    <li><a href="#visuals">Visuals</a></li>
+    <li><a href="#references">References</a></li>
   </ul>
 </nav>
 
@@ -960,10 +1169,189 @@
   </div>
 </div>
 
+<!-- VISUAL EXPLANATIONS -->
+<section id="visuals" style="max-width:1100px; margin:0 auto; padding:6rem 2rem;">
+  <span class="section-label">Visual Guide</span>
+  <h2>Understanding the Page's Visuals</h2>
+  <p style="margin-bottom:3rem;">Each visual element on this page has been designed to reflect a specific idea from the novel. Here is an explanation of what you see and why it was chosen.</p>
+
+  <div class="visual-explain-list">
+
+    <div class="ve-item">
+      <div class="ve-icon">◎</div>
+      <div class="ve-body">
+        <h3 class="ve-title">The Pulsing Concentric Rings (Hero Section)</h3>
+        <p class="ve-desc">The four gold rings that slowly expand and breathe behind the title represent the World State's all-encompassing control — radiating outward, inescapable, yet invisible to those inside them. Their gentle, hypnotic pulse mirrors the soma-induced contentment of citizens: soothing on the surface, suffocating at its core. The rings grow fainter as they expand, echoing how the conditioning weakens individual thought the further it spreads through society.</p>
+      </div>
+    </div>
+
+    <div class="ve-item">
+      <div class="ve-icon">▬</div>
+      <div class="ve-body">
+        <h3 class="ve-title">The Scrolling Ticker Banner (World State Motto)</h3>
+        <p class="ve-desc">The endlessly looping ticker — <em>Community · Identity · Stability</em> — mimics the hypnopaedic sleep-teaching used in the novel, where slogans are repeated thousands of times until they replace independent thought. The mechanical, never-stopping scroll evokes a factory conveyor belt, a nod to Henry Ford's assembly-line philosophy that the World State has applied to human beings themselves. It cannot be paused; it cannot be questioned.</p>
+      </div>
+    </div>
+
+    <div class="ve-item">
+      <div class="ve-icon">α β γ</div>
+      <div class="ve-body">
+        <h3 class="ve-title">The Five Caste Cards (Greek Letter System)</h3>
+        <p class="ve-desc">Each caste is represented by its Greek letter in a distinct colour palette — warm gold for Alphas at the top, fading to a muted grey-brown for Epsilons at the bottom. The cards grow darker and more muted as the hierarchy descends, a visual metaphor for the diminishing light and consciousness engineered into each lower caste. The hover effect (cards rising slightly on hover) is intentionally absent for Epsilons, hinting that they have no upward mobility — not even symbolically. Colour-coding was chosen because in the novel, each caste literally wears a different colour uniform.</p>
+      </div>
+    </div>
+
+    <div class="ve-item">
+      <div class="ve-icon">|</div>
+      <div class="ve-body">
+        <h3 class="ve-title">The Gold Left-Border on Character Cards</h3>
+        <p class="ve-desc">Each character card reveals a thin gold line along its left edge on hover, growing upward from the bottom. This represents the characters' suppressed individuality — the part of themselves that exists beneath their conditioning. For most, it only emerges under pressure, partially, upward from the ground. The gold colour is shared with the World State's decorative motifs, suggesting that even rebellion is shaped by the very system it resists.</p>
+      </div>
+    </div>
+
+    <div class="ve-item">
+      <div class="ve-icon">❝</div>
+      <div class="ve-body">
+        <h3 class="ve-title">The Deep Red Quote Banner</h3>
+        <p class="ve-desc">The opening lines of the novel are presented against a deep crimson background — a colour evoking both danger and the biological (blood, reproduction, life). This is fitting, since the passage describes the Central London Hatchery and Conditioning Centre, where human life is manufactured. The enormous ghost quotation mark behind the text represents the way the World State speaks in certainties — official, monolithic, unanswerable. The text itself is set in an italic serif font to signal its literary weight.</p>
+      </div>
+    </div>
+
+    <div class="ve-item">
+      <div class="ve-icon">①②③</div>
+      <div class="ve-body">
+        <h3 class="ve-title">The Theme Grid with Ghost Numbers</h3>
+        <p class="ve-desc">The six major themes are arranged in a two-column grid separated by thin borders — a structure that deliberately resembles a periodic table or a government classification chart, echoing how the World State reduces all of human experience to categories and functions. Each cell bears a large, nearly transparent number in the background — visible but ghostly, like ideas the State has not fully erased. The hover highlight is kept minimal to reflect the restraint required to even think these thoughts in the novel's world.</p>
+      </div>
+    </div>
+
+    <div class="ve-item">
+      <div class="ve-icon">◐</div>
+      <div class="ve-body">
+        <h3 class="ve-title">The Dark Colour Palette & Grain Texture</h3>
+        <p class="ve-desc">The overall page uses a dark background — near-black with warm brown undertones — and a subtle film-grain noise overlay across the entire surface. This aesthetic evokes aged paper, dimly lit archival rooms, and the suppressed past that the World State has buried. The cream and gold typography suggests historical documents, contrasting with the cold sterility of the World State's actual aesthetic (white labs, uniform overalls). The grain texture is a deliberate act of imperfection — a reminder that the novel itself is a relic of a world that valued memory and texture over smooth, manufactured comfort.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<div style="background:#0e0b07; width:100%; padding:6rem 2rem;" id="references">
+  <div style="max-width:1100px; margin:0 auto;">
+    <span class="section-label">References</span>
+    <h2>Sources & Further Reading</h2>
+    <p style="margin-bottom:3rem;">The following books, articles, and websites were consulted in the preparation of this page and are recommended for deeper study of the novel and its context.</p>
+
+    <div class="ref-list">
+
+      <div class="ref-card">
+        <span class="ref-num">01</span>
+        <div class="ref-body">
+          <h4 class="ref-title">Brave New World</h4>
+          <p class="ref-meta">Aldous Huxley · Chatto &amp; Windus, London, 1932</p>
+          <p class="ref-desc">The primary source. All plot details, quotations, character descriptions, and world-building elements on this page derive from Huxley's original text, as digitised by Distributed Proofreaders Canada (Faded Page eBook #20160545).</p>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <span class="ref-num">02</span>
+        <div class="ref-body">
+          <h4 class="ref-title">Brave New World Revisited</h4>
+          <p class="ref-meta">Aldous Huxley · Harper &amp; Brothers, New York, 1958</p>
+          <p class="ref-desc">Huxley's own non-fiction sequel, in which he revisits each theme of the novel in essay form and expresses alarm at how quickly reality was converging on his dystopia. Essential for understanding the author's own interpretation of his warnings about propaganda, overpopulation, and chemical persuasion.</p>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <span class="ref-num">03</span>
+        <div class="ref-body">
+          <h4 class="ref-title">SparkNotes: Brave New World — Full Study Guide</h4>
+          <p class="ref-meta">SparkNotes Editors · SparkNotes LLC · <a href="https://www.sparknotes.com/lit/bravenew/" target="_blank" class="ref-link">sparknotes.com/lit/bravenew</a></p>
+          <p class="ref-desc">A comprehensive chapter-by-chapter study guide covering plot summary, character analysis, thematic breakdown, and important quotations. Particularly useful for confirming caste hierarchy details and the role of secondary characters such as the Director and Helmholtz Watson.</p>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <span class="ref-num">04</span>
+        <div class="ref-body">
+          <h4 class="ref-title">Brave New World — Encyclopedia Britannica</h4>
+          <p class="ref-meta">The Editors of Encyclopaedia Britannica · Britannica.com · <a href="https://www.britannica.com/topic/Brave-New-World" target="_blank" class="ref-link">britannica.com/topic/Brave-New-World</a></p>
+          <p class="ref-desc">A scholarly overview of the novel's publication history, its reception in 1932, the censorship and banning it faced in multiple countries, and its position within the canon of twentieth-century dystopian literature. Also covers Huxley's biography and literary influences.</p>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <span class="ref-num">05</span>
+        <div class="ref-body">
+          <h4 class="ref-title">Aldous Huxley: A Biography</h4>
+          <p class="ref-meta">Sybille Bedford · Alfred A. Knopf / Harper &amp; Row, 1974</p>
+          <p class="ref-desc">The definitive authorised biography of Huxley, providing crucial context about the personal anxieties — his partial blindness, the shadow of World War I, his encounters with mass-production America — that shaped the writing of <em>Brave New World</em> in four months in 1931.</p>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <span class="ref-num">06</span>
+        <div class="ref-body">
+          <h4 class="ref-title">CliffsNotes: Brave New World Critical Essays &amp; Analysis</h4>
+          <p class="ref-meta">CliffsNotes · Houghton Mifflin Harcourt · <a href="https://www.cliffsnotes.com/literature/b/brave-new-world" target="_blank" class="ref-link">cliffsnotes.com/literature/b/brave-new-world</a></p>
+          <p class="ref-desc">Critical essays examining the philosophical underpinnings of the novel, including its engagement with Fordism, Freudianism, and behaviourist psychology. The analysis of Mustapha Mond's debate with John in the final chapters informed the "Freedom vs. Happiness" theme section on this page.</p>
+        </div>
+      </div>
+
+      <div class="ref-card">
+        <span class="ref-num">07</span>
+        <div class="ref-body">
+          <h4 class="ref-title">LitCharts: Brave New World Themes, Symbols &amp; Motifs</h4>
+          <p class="ref-meta">LitCharts LLC · <a href="https://www.litcharts.com/lit/brave-new-world" target="_blank" class="ref-link">litcharts.com/lit/brave-new-world</a></p>
+          <p class="ref-desc">An in-depth thematic and symbolic reference covering the significance of soma, the Savage Reservation, the role of Shakespeare, and the meaning of the World State motto. Used as a cross-reference for the themes and character sections of this page.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- AUTHORS CREDIT -->
+<div class="authors-credit">
+  <div class="authors-inner">
+    <span class="section-label" style="display:block; text-align:center; margin-bottom:1.5rem;">Done By</span>
+    <div class="authors-grid">
+      <div class="author-card">
+        <span class="author-initial">A</span>
+        <h3 class="author-name">Amal Vinod</h3>
+        <p class="author-id">RA2511003011669</p>
+      </div>
+      <div class="author-card">
+        <span class="author-initial">V</span>
+        <h3 class="author-name">Vyom Singh</h3>
+        <p class="author-id">RA2511003011619</p>
+      </div>
+      <div class="author-card">
+        <span class="author-initial">Ab</span>
+        <h3 class="author-name">Abhiram Koppana</h3>
+        <p class="author-id">RA2511003011663</p>
+      </div>
+      <div class="author-card">
+        <span class="author-initial">M</span>
+        <h3 class="author-name">Mohammed Sayhaan</h3>
+        <p class="author-id">RA2511003011659</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <p class="footer-title">Brave New World</p>
   <p>Aldous Huxley · 1932 &nbsp;·&nbsp; An Informational Reference &nbsp;·&nbsp; For Educational Use</p>
+  <p style="margin-top: 1.5rem; color: rgba(255,255,255,0.12);">— &nbsp; Done By &nbsp; —</p>
+  <p style="margin-top: 0.6rem; font-size: 0.7rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.18);">
+    Amal Vinod · RA2511003011669 &nbsp;&nbsp;|&nbsp;&nbsp; Vyom Singh · RA2511003011619
+  </p>
+  <p style="margin-top: 0.4rem; font-size: 0.7rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.18);">
+    Abhiram Koppana · RA2511003011663 &nbsp;&nbsp;|&nbsp;&nbsp; Mohammed Sayhaan · RA2511003011659
+  </p>
 </footer>
 
 <script>
@@ -983,7 +1371,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.char-card, .caste-card, .theme-item, .stat-card, .fact-item').forEach(el => {
+  document.querySelectorAll('.char-card, .caste-card, .theme-item, .stat-card, .fact-item, .ve-item, .ref-card, .author-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(16px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
